@@ -6,6 +6,15 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordCheckerTest {
+
+    @Test
+    @DisplayName("Does password fulfill ALL requirements")
+    public void testValidPW() {
+        PasswordChecker password = new PasswordChecker();
+        assertTrue(password.isValid("P4$$w0rd"));
+        assertFalse(password.isValid("password="));
+    }
+
     @Test
     @DisplayName("Is password length valid")
     public void testPasswordLength() {
@@ -34,7 +43,7 @@ public class PasswordCheckerTest {
     @DisplayName("Does password contain special characters")
     public void testPasswordSpecialChars() {
         PasswordChecker password = new PasswordChecker();
-        assertTrue(password.checkSpecialChars("Pw12345?!"));
+        assertTrue(password.checkSpecialChars("P4$$w0rd"));
         assertFalse(password.checkSpecialChars("Password=&"));
     }
 
@@ -43,16 +52,23 @@ public class PasswordCheckerTest {
     public void testPasswordOtherSpecialChars() {
         PasswordChecker password = new PasswordChecker();
         assertFalse(password.noOtherSpecialChars("Pw=123567?&!"));
-        assertTrue(password.noOtherSpecialChars("Pw123456?"));
+        assertTrue(password.noOtherSpecialChars("P4$$w0rd"));
     }
-/*
+
     @Test
-    @DisplayName("max two numbers in continuation")
+    @DisplayName("max two continuing numbers")
     public void testNumberContinuation() {
         PasswordChecker password = new PasswordChecker();
         assertFalse(password.checkNumberContinuation("123Password?"));
-        assertTrue(password.checkNumberContinuation("45Password?"));
+        assertTrue(password.checkNumberContinuation("245Password?"));
+    }
+/*
+    @Test
+    @DisplayName("max 3 occurences of same digit in a row")
+    public void test3samedigitsmax() {
+        PasswordChecker password = new PasswordChecker();
+        assertFalse(password.check3sameDigits("P4444ssword"));
+        assertTrue(password.ch);
     }
 */
-
 }

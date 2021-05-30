@@ -2,6 +2,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PasswordChecker {
+
+    /*
+    true, if all requirements are fulfilled
+     */
+    public boolean isValid(String pw) {
+        return checkLength(pw) && checkSmallCapital(pw) && checkDigits(pw) && checkSpecialChars(pw) && noOtherSpecialChars(pw);
+    }
+
     /*
 returns true, if password has not less than 8 and not more than 25 characters
  */
@@ -22,10 +30,10 @@ returns true, if password has not less than 8 and not more than 25 characters
     }
 
     /*
-    true, if there at least one digit is present
+    true, if at least two digits are present (Zahlen im Plural)
      */
     public boolean checkDigits(String password) {
-        return password.matches("[\\d]+");
+        return password.matches("(.*\\d.*){2,}");
     }
 
     /*
@@ -60,11 +68,18 @@ returns true, if password has not less than 8 and not more than 25 characters
         return noOtherSpecialCharsPresent;
     }
 
-/*
+    /*
+    false, if more than two consecutive numbers differ in +1
+     */
     public boolean checkNumberContinuation(String password) {
         for (int i = 0; i < password.length(); i++) {
-            if (password.charAt(i).
+            if (String.valueOf(password.charAt(i)).matches("[0-9]")) {
+                if ((password.charAt(i) + 1 == password.charAt(i+1)) && (password.charAt(i)+2 == password.charAt(i+2))) {
+                    return false;
+                }
+            }
         }
+        return true;
     }
-*/
+
 }
