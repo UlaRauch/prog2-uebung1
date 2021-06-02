@@ -76,7 +76,7 @@ public class PasswordChecker {
 
     //false, if more than three digits in a row are the same
     public boolean check3sameNumbersMax(String password) {
-        for (int i = 0; i < password.length() - 1; i++) {
+        for (int i = 0; i < password.length() - 3; i++) {
             if (String.valueOf(password.charAt(i)).matches("\\d")) { //next time: Character.isDigit(passtword.charAt(i))
                 for (int j = i; j < i+3; j++) {
                     if (password.charAt(j) != password.charAt(j + 1)) {
