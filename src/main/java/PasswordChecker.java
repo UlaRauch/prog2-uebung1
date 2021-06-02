@@ -49,7 +49,7 @@ public class PasswordChecker {
 
         for (String s : splitPW) {
             //add count, if special char is present
-            if (s.matches("[\\W]")) {
+            if (s.matches("[^a-zA-Z0-9]")) {
                 otherSpecials++;
                 //remove last count, if special char matches allowed chars
                 if (s.matches("[()#$?!%/@]")) {
@@ -64,7 +64,7 @@ public class PasswordChecker {
     //false, if more than two consecutive numbers differ in +1
     public boolean checkNumberContinuation(String password) {
         for (int i = 0; i < password.length(); i++) {
-            if (String.valueOf(password.charAt(i)).matches("[0-9]")) {
+            if (String.valueOf(password.charAt(i)).matches("[0-9]")) { //next time: Character.isDigit(passtword.charAt(i))
                 if ((password.charAt(i) + 1 == password.charAt(i + 1))
                         && (password.charAt(i) + 2 == password.charAt(i + 2))) {
                     return false;
@@ -77,8 +77,8 @@ public class PasswordChecker {
     //false, if more than three digits in a row are the same
     public boolean check3sameNumbersMax(String password) {
         for (int i = 0; i < password.length() - 1; i++) {
-            if (String.valueOf(password.charAt(i)).matches("\\d")) {
-                for (int j = i; j < i+4; j++) {
+            if (String.valueOf(password.charAt(i)).matches("\\d")) { //next time: Character.isDigit(passtword.charAt(i))
+                for (int j = i; j < i+3; j++) {
                     if (password.charAt(j) != password.charAt(j + 1)) {
                         break;
                     } else if (j-i == 2) {
